@@ -115,16 +115,16 @@ function addFunctionToBoxes() {
     document.querySelector(`#b${num}`).addEventListener('click', function (e) {
       let i = Number(e.target.id[1]);
 
-      if (!plays[i]) {
-        const { shape } = currentPlayer;
+      if (plays[i]) return;
 
-        document.querySelector(`#b${i}`).innerHTML = `<h6 class="scale-up">${shape}</h6>`;
-        plays[i] = shape;
-        playsOrder.push(i);
-        if (playsOrder.length > 4) checkWins(i);
-        if (playsOrder.length >= 9 && playsOrder.length) tie();
-        if (playsOrder.length) changePlayer();
-      }
+      const { shape } = currentPlayer;
+
+      document.querySelector(`#b${i}`).innerHTML = `<h6 class="scale-up">${shape}</h6>`;
+      plays[i] = shape;
+      playsOrder.push(i);
+      if (playsOrder.length > 4) checkWins(i);
+      if (playsOrder.length >= 9) tie();
+      if (playsOrder.length) changePlayer();
     });
   }
 }
